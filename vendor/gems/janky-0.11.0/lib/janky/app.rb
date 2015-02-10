@@ -13,6 +13,8 @@ module Janky
     }
 
     before do
+      ActiveRecord::Base.connection.verify!
+
       if organization = github_organization
         github_organization_authenticate!(organization)
       end
