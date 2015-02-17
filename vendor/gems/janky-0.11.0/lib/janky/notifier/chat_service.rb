@@ -2,6 +2,8 @@ module Janky
   module Notifier
     class ChatService
       def self.completed(build)
+        return unless build.state_changed?
+
         status = build.green? ? "was successful" : "failed"
         color = build.green? ? "green" : "red"
 

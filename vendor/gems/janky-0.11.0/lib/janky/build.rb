@@ -294,5 +294,14 @@ module Janky
     def branch_name
       branch.name
     end
+
+    def previous_build
+      branch.builds.completed.where(room_id: room_id).where('id <> ?', id).first
+    end
+
+    def state_changed?
+      p = previous_build
+      p.nil? || p.green != green
+    end
   end
 end
